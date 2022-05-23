@@ -37,7 +37,23 @@ describe("User Account Management", () => {
 
 	test("User login successfully", async () => {
 		const res = await User.login("malik", "20cc")
-		expect(res).toBe("Login successfully")
+		//expect(res).toBe("Login successfully")
+		//expect(res).toEqual(//{
+		expect(res).toMatchObject({
+			//expect.objectContaining({
+				//_id: "627e0ff26fbe85100655686a",
+				// username: "farhan",
+				// phone: "0154446666",
+				//_id: expect.any(String),
+				//name: "malik",	//expect.any(String)
+				//phone: "0184342222",		//expect.any(Number)
+				//_id: expect.any(String),
+				username: expect.any(String),
+				phonenumber: expect.any(String),
+			//})
+		//}
+		}
+		);
 	})
 
 	test("User update wrong username", async () => {
@@ -50,25 +66,26 @@ describe("User Account Management", () => {
 		expect(res).toBe("Invalid password") 
 	})
 
-	// test("User update successfully", async () => {
-	// 	//const res = await User.update("malik", "20cc", "0130001111")
-	// 	const res = await User.update("farhan", "33cc", "0154447777")
-	// 	expect(res).toBe("Update successfully") 
-	// 	expect(res).toEqual(
-	// 		expect.objectContaining({
-	// 			// _id: "627e0ff26fbe85100655686a",		//res._id
-	// 			password: "33cc",							//res.name
-	// 			phonenumber: "0154447777",				//res.phone
-	// 			username: "farhan",
+	test("User update successfully", async () => {
+		//const res = await User.update("malik", "20cc", "0130001111")
+		const res = await User.update("farhan", "33cc", "0154447777")
+		//expect(res).toBe("Update successfully") 
+		expect(res).toMatchObject({
+			//expect.objectContaining({
+				// _id: "627e0ff26fbe85100655686a",		//res._id
+				// password: "33cc",							//res.name
+				// phonenumber: "0154447777",				//res.phone
+				// username: "farhan",
 
-	// 			//  _id: expect.any(String),
-	// 			password: expect.any(String),
-	// 			phonenumber: expect.any(Number),
-	// 			username: expect.any(String),
-	// 		})
-	// 	);
+				//_id: expect.any(String),
+				password: expect.any(String),
+				phonenumber: expect.any(String),
+				username: expect.any(String),
+			//})
+		}
+		);
 			
-	// })
+	})
 
 	test("User delete wrong username", async () => {
 		const res = await User.delete("balik", "20cc")
