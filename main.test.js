@@ -494,7 +494,7 @@ describe('Express Route Test', function () {
 	// /visitor/view
 	it('view visitor failed, wrong username', async () => {
 		return request
-			.get('/visitor/view')
+			.post('/visitor/view')
 			.set('Authorization', `Bearer ${adminaccessToken}`)
 			.send({username: "wrong-username"})
 			.expect('Content-Type', /text/)
@@ -505,7 +505,7 @@ describe('Express Route Test', function () {
 
 	it('view visitor failed, unauthorized (no token)', async () => {
 		return request
-			.get('/visitor/view')
+			.post('/visitor/view')
 			.send({username: "usernamevisitor"})
 			.expect('Content-Type', /text/)
 			.expect(401).then(response => {
@@ -515,7 +515,7 @@ describe('Express Route Test', function () {
 
 	it('view visitor successfully', async () => {
 		return request
-			.get('/visitor/view')
+			.post('/visitor/view')
 			.set('Authorization', `Bearer ${visitoraccessToken}`)
 			.send({username: "usernamevisitor"})
 			.expect('Content-Type', /json/)

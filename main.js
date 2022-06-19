@@ -721,7 +721,7 @@ app.patch('/update/visitor/returning', verifyToken, async (req,res) =>{
 /**
  * @swagger
  * /visitor/view:
- *   get:
+ *   post:
  *     security:
  *       - bearerAuth: []
  *     description: find visitor
@@ -752,7 +752,7 @@ app.patch('/update/visitor/returning', verifyToken, async (req,res) =>{
  */
 
 //view visitor
-app.get('/visitor/view',verifyToken, async (req, res) => {
+app.post('/visitor/view',verifyToken, async (req, res) => {
 	console.log(req.user);
 
 	if(req.user.role=='admin'||req.user.role=='security'||req.user.role=='visitor'){
