@@ -40,9 +40,29 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     description: Welcome!
+ *     responses:
+ *       200:
+ *         description: Returns Hello World.
+ */
+
 app.get('/', (req, res) => {
 	res.send('Hello World')
 })
+
+/**
+ * @openapi
+ * /hello:
+ *   get:
+ *     description: greetings
+ *     responses:
+ *       200:
+ *         description: Returns Hello BENR2423.
+ */
 
 app.get('/hello', (req, res) => {
 	res.send('Hello BENR2423')
