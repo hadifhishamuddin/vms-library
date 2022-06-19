@@ -198,7 +198,7 @@ app.get('/hello', (req, res) => {
 app.post('/login/admin', async (req, res) => {
 	console.log(req.body);
 
-	const user = await User.login(req.body.username, req.body.password);
+const user = await User.login(req.body.username, req.body.password);
 
 	if (user == 'Invalid username'){
 		res.status(401).send("Invalid username")
