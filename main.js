@@ -50,9 +50,9 @@ app.use(express.urlencoded({ extended: false }))
  *         description: Returns Hello World.
  */
 
-// app.get('/', (req, res) => {
-// 	res.send('Hello World')
-// })
+app.get('/', (req, res) => {
+	res.send('Hello World')
+})
 
 /**
  * @openapi
