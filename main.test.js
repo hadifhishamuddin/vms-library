@@ -24,8 +24,19 @@ describe('Express Route Test', function () {
 		visitoraccessToken=response3.body.token;
 	});
 
-	// /hello
+	// /
 	it('should return hello world', async () => {
+		return request
+			.get('/')
+			.expect(200)
+			.expect('Content-Type', /text/)
+			.then(res => {
+				expect(res.text).toBe('Hello World');
+			});
+		 })
+
+	// /hello
+	it('should return hello BENR2423', async () => {
 	return request
 		.get('/hello')
 		.expect(200)
