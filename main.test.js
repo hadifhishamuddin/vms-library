@@ -25,15 +25,15 @@ describe('Express Route Test', function () {
 	});
 
 	// /
-	it('should return hello world', async () => {
-		return request
-			.get('/')
-			.expect(200)
-			.expect('Content-Type', /text/)
-			.then(res => {
-				expect(res.text).toBe('Hello World');
-			});
-		 })
+	// it('should return hello world', async () => {
+	// 	return request
+	// 		.get('/')
+	// 		.expect(200)
+	// 		.expect('Content-Type', /text/)
+	// 		.then(res => {
+	// 			expect(res.text).toBe('Hello World');
+	// 		});
+	// 	 })
 
 	// /hello
 	it('should return hello BENR2423', async () => {
