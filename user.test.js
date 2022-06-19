@@ -1,4 +1,5 @@
 const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 const User = require("./user")
 
 describe("User Account Management", () => {
@@ -16,89 +17,68 @@ describe("User Account Management", () => {
 	})
 
 	test("New user registration", async () => {
-		const res = await User.register("malik", "20cc", "0184342222")
+		const res = await User.register("correct-username", "correct-password", "admin", 60193459191)
 		expect(res).toBe("New user registrated")
 	})
 
 	test("Duplicate username", async () => {
-		const res = await User.register("malik", "45hsjs","0193459191")
+		const res = await User.register("correct-username", "another-password", "admin", 6060606060)
 		expect(res).toBe("Duplicate username")
 	})
 
 	test("User login invalid username", async () => {
-		const res = await User.login("kamal", "20cc")
+		const res = await User.login("wrong-username", "correct-password")
 		expect(res).toBe("Invalid username")
 	})
 
 	test("User login invalid password", async () => {
-		const res = await User.login("malik", "4545asdf")
+		const res = await User.login("correct-username", "wrong-password")
 		expect(res).toBe("Invalid password") 
 	})
 
 	test("User login successfully", async () => {
-		const res = await User.login("malik", "20cc")
-		//expect(res).toBe("Login successfully")
-		//expect(res).toEqual(//{
+		const res = await User.login("correct-username", "correct-password")
 		expect(res).toMatchObject({
-			//expect.objectContaining({
-				//_id: "627e0ff26fbe85100655686a",
-				// username: "farhan",
-				// phone: "0154446666",
-				//_id: expect.any(String),
-				//name: "malik",	//expect.any(String)
-				//phone: "0184342222",		//expect.any(Number)
-				//_id: expect.any(String),
-				username: expect.any(String),
-				phonenumber: expect.any(String),
-			//})
-		//}
-		}
-		);
+			_id: expect.any(ObjectId),
+			username: expect.any(String),
+			phonenumber: expect.any(Number),
+			role: expect.any(String)
+		});
 	})
 
 	test("User update wrong username", async () => {
-		const res = await User.update("kamal", "20cc", "0130001111")
+		const res = await User.update("wrong-username", "correct-password", 60130001111, "new-password")
 		expect(res).toBe("Invalid username") 
 	})
 
 	test("User update wrong password", async () => {
-		const res = await User.update("malik", "hashdkandnsadjn", "0130001111")
+		const res = await User.update("correct-username", "wrong-password", 60130001111, "new-password")
 		expect(res).toBe("Invalid password") 
 	})
 
 	test("User update successfully", async () => {
-		//const res = await User.update("malik", "20cc", "0130001111")
-		const res = await User.update("farhan", "33cc", "0154447777")
-		//expect(res).toBe("Update successfully") 
+		const res = await User.update("correct-username", "correct-password", 60130001111, "new-password")
 		expect(res).toMatchObject({
-			//expect.objectContaining({
-				// _id: "627e0ff26fbe85100655686a",		//res._id
-				// password: "33cc",							//res.name
-				// phonenumber: "0154447777",				//res.phone
-				// username: "farhan",
-
-				//_id: expect.any(String),
-				password: expect.any(String),
-				phonenumber: expect.any(String),
-				username: expect.any(String),
-			//})
+			_id: expect.any(ObjectId),
+			username: expect.any(String),
+			phonenumber: expect.any(Number),
 		}
 		);
 			
 	})
 
 	test("User delete wrong username", async () => {
-		const res = await User.delete("balik", "20cc")
+		const res = await User.delete("wrong-username", "new-password")
 		expect(res).toBe("Invalid username") 
 	})
 
 	test("User delete wrong password", async () => {
-		const res = await User.delete("malik", "hashdkandnsadjn")
+		const res = await User.delete("correct-username", "wrong-password")
 		expect(res).toBe("Invalid password") 
 	})
 
 	test("User delete successfully", async () => {
-		const res = await User.delete("malik", "20cc")
+		const res = await User.delete("correct-username", "new-password")
 		expect(res).toBe("Delete successfully") 
 	})
 
