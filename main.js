@@ -72,9 +72,9 @@ app.get('/hello', (req, res) => {
  *         password: 
  *           type: string
  *         role: 
- *           type: number
- *         phone:
  *           type: string
+ *         phone:
+ *           type: number
  *     variable:
  *       type: object
  *       properties:
